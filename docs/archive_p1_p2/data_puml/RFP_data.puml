@@ -1,0 +1,163 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define factT(x) class x << (F,#DC504F) fact >>
+!define dimT(x) class x << (D,#3E93B5) dim >>
+!define softDimT(x) class x << (D,#3E93B5) softDim >>
+!define primary_key(x) <b><font size="14" color="#4041A4">x</font></b>
+!define foreign_key(x) <b><font size="12" color="#6666FF">x</font></b>
+!define link(t1,c1,t2,c2) t1 c1 -- c2 t2
+hide empty fields
+hide stereotypes
+
+skinparam class {
+  BackgroundColor<<fact>> #FFF9F9
+  BackgroundColor<<dim>> #EFF5F8
+  BackgroundColor<<softDim>> #CDCDCD
+  BorderColor<<fact>> #DC504F
+  BorderColor<<dim>> #3E93B5
+  BorderColor<<softDim>> #3E93B5
+  ArrowColor #1078A1
+}
+
+package "Sales / Panel data" as Sales <<Rect>>{
+  factT(SAP) {
+    'Monthly Sales Outs to Prescriber and HCO end customers
+    foreign_key(sales_rep_id)
+    foreign_key(mdm_id) //Physicians and Account
+    month
+  }
+  factT(WSR) {
+    'Weekly Shipment and Reimbursement Specialty Pharmacy data from key Genentech Specialty Distributors
+    primary_key(trx_id)
+    foreign_key(spec_dist_id)
+    foreign_key(product_id)
+    week
+  }
+  factT(DDD-MD){
+    'Monthly HCO Outlet-level sales data (DDD-MD deliverable)
+    foreign_key(account_id)
+    foreign_key(product_id)
+    month
+    ---
+    strength
+    sales
+  }
+  factT(Xponent) {
+    'Monthly Prescriber-level sales data
+    foreign_key(md_id) // Physicians
+    foreign_key(product_id)
+    month
+    ---
+    strength
+    sales
+  }
+}
+
+package "Transactions / Event data" as Trnx <<Rect>> {
+package "Claims" as Claims <<Rect>>{
+  factT("Symphony Claims") {
+    'Hospital Claims data
+    primary_key(claim_id)
+    foreign_key(patient_id)
+    foreign_key(hospital_id) // Account - hospitals
+    treatment_date
+    claim_date
+  }
+  factT("Clarient Lab") {
+    'Laboratory order and patient data
+    primary_key(claim_id)
+    foreign_key(patient_id)
+    foreign_key(lab_id) //Account - labs
+    foreign_key(cpt_code)
+    order_date
+    service_date
+    claim_date
+  }
+  factT("GE EMR/Truven/Optum"){
+    'Claims
+    primary_key(claim_id)
+    foreign_key(patient_id)
+    foreign_key(mdm_id) //physicians
+    foreign_key(diag_code)
+    treatment_date
+    claim_date
+  }
+}
+
+package "Tactics" as Tactics <<Rect>>{
+  factT(SFDC) {
+    'Salesforce Field Sales interaction data against Prescribers and Healthcare Organizations
+    'Reimbursement organization patient and case data (includes customer touch points)
+    primary_key(call_id)
+    foreign_key(sales_rep_id)
+    foreign_key(acct_id)
+    foreign_key(md_id)
+    date
+  }
+  factT("Speaker Programs") {
+    'Speaker program attendee data
+    foreign_key(attendee_md_id)
+    foreign_key(location_acct_id)
+    foreign_key(program_id)
+    date
+  }
+  factT("Interactive Marketing Data Warehouse") {
+    'Interactive Marketing campaigns and social media data scrapes
+    foreign_key(md_id)
+    foreign_key(tactic_type)
+    date
+  }
+}
+}
+
+package "Links" as Links <<Rect>>{
+  dimT(HCOS) {
+    'HCOS Organization and affiliation data
+    primary_key(md_id)
+    foreign_key(child_mdm_id) //Account
+    foreign_key(parent_mdm_id) //Account
+  }
+  dimT("HCP Core"){
+    'Genentech Prescriber master data including credential and license data
+    primary_key(md_id)
+  }
+  dimT("Javelin Affiliations"){
+    'Field-defined Prescriber-to-DDD affiliation data
+    primary_key(md_id)
+    foreign_key(acct_mdm_id)
+  }
+  dimT(JAMS) {
+    'Field roster and territory alignment data
+    primary_key(zip)
+    foreign_key(territory)
+    foreign_key(division)
+    foreign_key(region)
+  }
+}
+
+package "Others" as Other <<Rect>>{
+  factT("HealthLeaders InterStudy") {
+    'Payer lives, policy and coverage data. Site of care and channel mix.
+  }
+  factT(MCDM) {
+    'Managed Care Data Mart: 867, SAP sales data, HCO organization master data via HCOS and internal stewardship
+  }
+}
+
+package "External" as External <<Rect>>{
+  factT("Cms NPI master") {
+    primary_key(npi)
+  }
+  factT("Cms Reimbursement") {
+    foreign_key(npi)
+    foreign_key(proc_code)
+  }
+  factT("Cms Referal") {
+    foreign_key(referer_npi)
+    foreign_key(referee_npi)
+  }
+  factT("Clinial Trial DB") {
+  }
+}
+
+@enduml

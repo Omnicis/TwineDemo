@@ -1,0 +1,429 @@
+CLAIM_GID            Non-Null Count         2914071
+CLAIM_GID            Min Length             20
+CLAIM_GID            Max Length             20
+CLAIM_GID            Approx Distinct Count  2640920
+PATIENT_GID          Non-Null Count         2914071
+PATIENT_GID          Min Length             20
+PATIENT_GID          Max Length             20
+PATIENT_GID          Approx Distinct Count  418478
+DRUG_ID              Non-Null Count         493023
+DRUG_ID              Min Length             13
+DRUG_ID              Max Length             13
+DRUG_ID              Approx Distinct Count  11
+PHYSICIAN_KEY        Non-Null Count         2747227
+PHYSICIAN_KEY        Min Length             20
+PHYSICIAN_KEY        Max Length             20
+PHYSICIAN_KEY        Approx Distinct Count  34933
+PHARMACY_FLAG        Non-Null Count         493023
+PHARMACY_FLAG        Min Length             1
+PHARMACY_FLAG        Max Length             1
+PHARMACY_FLAG        Approx Distinct Count  2
+PLAN_ID              Non-Null Count         493023
+PLAN_ID              Min Length             6
+PLAN_ID              Max Length             6
+PLAN_ID              Approx Distinct Count  2550
+GROUP_NBR            Non-Null Count         361415
+GROUP_NBR            Min Length             1
+GROUP_NBR            Max Length             15
+GROUP_NBR            Approx Distinct Count  13102
+PATIENT_PAY          Non-Null Count         313893
+PATIENT_PAY          Average                376.35944735945526
+PATIENT_PAY          Standard Deviation     1085.2337832850687
+PATIENT_PAY          Min                    0.0
+PATIENT_PAY          Max                    108755.08
+PLAN_PAY             Non-Null Count         316494
+PLAN_PAY             Average                5565.455124520529
+PLAN_PAY             Standard Deviation     3926.1520205074876
+PLAN_PAY             Min                    0.0
+PLAN_PAY             Max                    233046.6
+SECONDARY_PLAN_ID    Non-Null Count         37059
+SECONDARY_PLAN_ID    Min Length             6
+SECONDARY_PLAN_ID    Max Length             6
+SECONDARY_PLAN_ID    Approx Distinct Count  145
+SECONDARY_GROUP_NBR  Non-Null Count         36473
+SECONDARY_GROUP_NBR  Min Length             3
+SECONDARY_GROUP_NBR  Max Length             15
+SECONDARY_GROUP_NBR  Approx Distinct Count  143
+SECONDARY_PLAN_PAY   Non-Null Count         37059
+SECONDARY_PLAN_PAY   Average                660.4461350819013
+SECONDARY_PLAN_PAY   Standard Deviation     883.1897023619979
+SECONDARY_PLAN_PAY   Min                    0.0
+SECONDARY_PLAN_PAY   Max                    15951.36
+PATIENT_OOP          Non-Null Count         313893
+PATIENT_OOP          Average                298.3855093614723
+PATIENT_OOP          Standard Deviation     1039.3048460199377
+PATIENT_OOP          Min                    0.0
+PATIENT_OOP          Max                    108755.08
+REFILL_CODE          Non-Null Count         492707
+REFILL_CODE          Average                1.2405750273489111
+REFILL_CODE          Standard Deviation     1.9790845776349781
+REFILL_CODE          Min                    0.0
+REFILL_CODE          Max                    32.0
+QUANTITY             Non-Null Count         492882
+QUANTITY             Average                36.93099916410013
+QUANTITY             Standard Deviation     24.749121007094168
+QUANTITY             Min                    0.0
+QUANTITY             Max                    3600.0
+DAYS_SUPPLY          Non-Null Count         493023
+DAYS_SUPPLY          Average                31.130553746985434
+DAYS_SUPPLY          Standard Deviation     10.921548810627243
+DAYS_SUPPLY          Min                    0.0
+DAYS_SUPPLY          Max                    999.0
+DATE                 Time Start             "2012-01-01 00:00:00"
+DATE                 Time Edd               "2015-07-31 00:00:00"
+Histogram of DATE: Year
+key                      count      Pct    cumCount   cumPct
+2012                    759473   26.06%      759473   26.06%
+2013                    790400   27.12%     1549873   53.19%
+2014                    870928   29.89%     2420801   83.07%
+2015                    493270   16.93%     2914071  100.00%
+-------------------------------------------------
+Histogram of DATE: Month
+key                      count      Pct    cumCount   cumPct
+01                      280222    9.62%      280222    9.62%
+02                      251446    8.63%      531668   18.24%
+03                      268277    9.21%      799945   27.45%
+04                      278058    9.54%     1078003   36.99%
+05                      278307    9.55%     1356310   46.54%
+06                      273376    9.38%     1629686   55.92%
+07                      278618    9.56%     1908304   65.49%
+08                      202833    6.96%     2111137   72.45%
+09                      197814    6.79%     2308951   79.23%
+10                      219042    7.52%     2527993   86.75%
+11                      187897    6.45%     2715890   93.20%
+12                      198181    6.80%     2914071  100.00%
+-------------------------------------------------
+Histogram of DATE: Day of Week
+key                      count      Pct    cumCount   cumPct
+1                         5970    0.20%        5970    0.20%
+2                       598517   20.54%      604487   20.74%
+3                       651098   22.34%     1255585   43.09%
+4                       632275   21.70%     1887860   64.78%
+5                       548887   18.84%     2436747   83.62%
+6                       452991   15.54%     2889738   99.16%
+7                        24333    0.84%     2914071  100.00%
+-------------------------------------------------
+Histogram of DATE: Hour
+key                      count      Pct    cumCount   cumPct
+00                     2914071  100.00%     2914071  100.00%
+-------------------------------------------------
+SEQUENCE_NUMBER      Non-Null Count         493023
+SEQUENCE_NUMBER      Average                2.013444037290958E7
+SEQUENCE_NUMBER      Standard Deviation     10501.650546143519
+SEQUENCE_NUMBER      Min                    2.0120101E7
+SEQUENCE_NUMBER      Max                    2.0150725E7
+CLAIM_STATUS         Non-Null Count         493023
+CLAIM_STATUS         Average                0.8573271429527628
+CLAIM_STATUS         Standard Deviation     0.6523726171491057
+CLAIM_STATUS         Min                    0.0
+CLAIM_STATUS         Max                    2.0
+REJECT_CODE          Non-Null Count         145043
+REJECT_CODE          Min Length             1
+REJECT_CODE          Max Length             3
+REJECT_CODE          Approx Distinct Count  279
+REVERSAL_LAG         Non-Null Count         64727
+REVERSAL_LAG         Average                1.1273406504086387
+REVERSAL_LAG         Standard Deviation     3.9909786111274563
+REVERSAL_LAG         Min                    1.2E-5
+REVERSAL_LAG         Max                    148.830451
+RX_NUMBER            Non-Null Count         493023
+RX_NUMBER            Min Length             32
+RX_NUMBER            Max Length             32
+RX_NUMBER            Approx Distinct Count  212403
+DAYS_TILL_NEXT_FILL  Non-Null Count         400013
+DAYS_TILL_NEXT_FILL  Average                25.979633161922237
+DAYS_TILL_NEXT_FILL  Standard Deviation     44.41141842427267
+DAYS_TILL_NEXT_FILL  Min                    0.0
+DAYS_TILL_NEXT_FILL  Max                    1259.0
+COPAY_30             Non-Null Count         493023
+COPAY_30             Average                243.04621200228263
+COPAY_30             Standard Deviation     937.303030056708
+COPAY_30             Min                    0.0
+COPAY_30             Max                    233046.6
+SOURCE_OF_BUSINESS   Non-Null Count         493023
+SOURCE_OF_BUSINESS   Min Length             1
+SOURCE_OF_BUSINESS   Max Length             1
+SOURCE_OF_BUSINESS   Approx Distinct Count  5
+NEW_TO_PRODUCT       Non-Null Count         493023
+NEW_TO_PRODUCT       Average                0.2822545804151125
+NEW_TO_PRODUCT       Standard Deviation     0.4500970374911442
+NEW_TO_PRODUCT       Min                    0.0
+NEW_TO_PRODUCT       Max                    1.0
+CONCOMITANT_FLAG     Non-Null Count         493023
+CONCOMITANT_FLAG     Average                0.026063692768897192
+CONCOMITANT_FLAG     Standard Deviation     0.15932491385673483
+CONCOMITANT_FLAG     Min                    0.0
+CONCOMITANT_FLAG     Max                    1.0
+PTD_FINAL_CLAIM      Non-Null Count         493023
+PTD_FINAL_CLAIM      Average                2.337554231749837
+PTD_FINAL_CLAIM      Standard Deviation     3.5151390097690522
+PTD_FINAL_CLAIM      Min                    0.0
+PTD_FINAL_CLAIM      Max                    9.0
+DAW_CDE              Non-Null Count         493023
+DAW_CDE              Average                0.05410700920646704
+DAW_CDE              Standard Deviation     0.2888137812827308
+DAW_CDE              Min                    0.0
+DAW_CDE              Max                    9.0
+REFILL_ATHRZ         Non-Null Count         492943
+REFILL_ATHRZ         Average                3.73068488648789
+REFILL_ATHRZ         Standard Deviation     4.827758510899704
+REFILL_ATHRZ         Min                    0.0
+REFILL_ATHRZ         Max                    100.0
+PRODUCT              Non-Null Count         2914071
+PRODUCT              Min Length             5
+PRODUCT              Max Length             11
+PRODUCT              Approx Distinct Count  13
+PAYMENT_TYPE         Non-Null Count         493023
+PAYMENT_TYPE         Min Length             4
+PAYMENT_TYPE         Max Length             19
+PAYMENT_TYPE         Approx Distinct Count  6
+PHYSICIAN_GID        Non-Null Count         2744997
+PHYSICIAN_GID        Min Length             20
+PHYSICIAN_GID        Max Length             20
+PHYSICIAN_GID        Approx Distinct Count  31758
+PHYSICIAN_ME_NUMBER  Non-Null Count         2744811
+PHYSICIAN_ME_NUMBER  Min Length             10
+PHYSICIAN_ME_NUMBER  Max Length             10
+PHYSICIAN_ME_NUMBER  Approx Distinct Count  31813
+LOCATION_CODE        Non-Null Count         2421048
+LOCATION_CODE        Min Length             1
+LOCATION_CODE        Max Length             3
+LOCATION_CODE        Approx Distinct Count  23
+SRVC_UNT_NBR         Non-Null Count         2421048
+SRVC_UNT_NBR         Min Length             1
+SRVC_UNT_NBR         Max Length             6
+SRVC_UNT_NBR         Approx Distinct Count  421
+ADJ_SRVC_UNIT_NBR    Non-Null Count         2421048
+ADJ_SRVC_UNIT_NBR    Min Length             2
+ADJ_SRVC_UNIT_NBR    Max Length             7
+ADJ_SRVC_UNIT_NBR    Approx Distinct Count  416
+SRVC_LINE_SEQ        Non-Null Count         2421048
+SRVC_LINE_SEQ        Min Length             1
+SRVC_LINE_SEQ        Max Length             3
+SRVC_LINE_SEQ        Approx Distinct Count  219
+PAYER_TYPE           Non-Null Count         2914071
+PAYER_TYPE           Min Length             4
+PAYER_TYPE           Max Length             51
+PAYER_TYPE           Approx Distinct Count  27
+COMPLETION_FLAG      Non-Null Count         2421048
+COMPLETION_FLAG      Min Length             5
+COMPLETION_FLAG      Max Length             5
+COMPLETION_FLAG      Approx Distinct Count  5
+DUP_FLAG             Non-Null Count         2421048
+DUP_FLAG             Min Length             1
+DUP_FLAG             Max Length             1
+DUP_FLAG             Approx Distinct Count  2
+SRVC_CHRG_AMT        Non-Null Count         2415092
+SRVC_CHRG_AMT        Average                6382.579780641825
+SRVC_CHRG_AMT        Standard Deviation     9470.383153906661
+SRVC_CHRG_AMT        Min                    0.0
+SRVC_CHRG_AMT        Max                    563684.4
+INDICATION           Non-Null Count         2421048
+INDICATION           Min Length             3
+INDICATION           Max Length             9
+INDICATION           Approx Distinct Count  20
+DIAG0                Non-Null Count         2031884
+DIAG0                Min Length             3
+DIAG0                Max Length             6
+DIAG0                Approx Distinct Count  371
+DIAG1                Non-Null Count         2031884
+DIAG1                Min Length             3
+DIAG1                Max Length             6
+DIAG1                Approx Distinct Count  334
+DIAG2                Non-Null Count         2031884
+DIAG2                Min Length             3
+DIAG2                Max Length             6
+DIAG2                Approx Distinct Count  228
+DIAG3                Non-Null Count         2031884
+DIAG3                Min Length             3
+DIAG3                Max Length             6
+DIAG3                Approx Distinct Count  138
+DIAG4                Non-Null Count         2031884
+DIAG4                Min Length             5
+DIAG4                Max Length             6
+DIAG4                Approx Distinct Count  79
+DIAG5                Non-Null Count         2031884
+DIAG5                Min Length             5
+DIAG5                Max Length             6
+DIAG5                Approx Distinct Count  54
+DIAG6                Non-Null Count         2031884
+DIAG6                Min Length             5
+DIAG6                Max Length             6
+DIAG6                Approx Distinct Count  27
+DIAG7                Non-Null Count         2031884
+DIAG7                Min Length             5
+DIAG7                Max Length             6
+DIAG7                Approx Distinct Count  17
+DIAG8                Non-Null Count         2031884
+DIAG8                Min Length             5
+DIAG8                Max Length             6
+DIAG8                Approx Distinct Count  11
+DIAG9                Non-Null Count         2031884
+DIAG9                Min Length             5
+DIAG9                Max Length             6
+DIAG9                Approx Distinct Count  8
+CLAIM_TYPE           Non-Null Count         2914071
+CLAIM_TYPE           Min Length             2
+CLAIM_TYPE           Max Length             5
+CLAIM_TYPE           Approx Distinct Count  3
+LOCATION             Non-Null Count         2420967
+LOCATION             Min Length             4
+LOCATION             Max Length             11
+LOCATION             Approx Distinct Count  5
+MONTH                Non-Null Count         2914071
+MONTH                Average                201343.76017022235
+MONTH                Standard Deviation     104.05249345389595
+MONTH                Min                    201201.0
+MONTH                Max                    201507.0
+QUARTER              Non-Null Count         2914071
+QUARTER              Min Length             6
+QUARTER              Max Length             6
+QUARTER              Approx Distinct Count  15
+PATIENT_AGE          Non-Null Count         2914071
+PATIENT_AGE          Average                67.8230729450312
+PATIENT_AGE          Standard Deviation     48.841700093028905
+PATIENT_AGE          Min                    -7984.0
+PATIENT_AGE          Max                    80.0
+PATIENT_GENDER       Non-Null Count         2914071
+PATIENT_GENDER       Min Length             1
+PATIENT_GENDER       Max Length             1
+PATIENT_GENDER       Approx Distinct Count  2
+PTNT_ZIP3            Non-Null Count         2913792
+PTNT_ZIP3            Min Length             2
+PTNT_ZIP3            Max Length             3
+PTNT_ZIP3            Approx Distinct Count  920
+PTNT_STATE           Non-Null Count         2913534
+PTNT_STATE           Min Length             2
+PTNT_STATE           Max Length             2
+PTNT_STATE           Approx Distinct Count  57
+CRC_PATIENT_FLAG     Non-Null Count         2914071
+CRC_PATIENT_FLAG     Average                0.19934929519562153
+CRC_PATIENT_FLAG     Standard Deviation     0.3995112119484651
+CRC_PATIENT_FLAG     Min                    0.0
+CRC_PATIENT_FLAG     Max                    1.0
+BREAST_PATIENT_FLAG  Non-Null Count         2914071
+BREAST_PATIENT_FLAG  Average                0.06826772580352367
+BREAST_PATIENT_FLAG  Standard Deviation     0.25220480813174284
+BREAST_PATIENT_FLAG  Min                    0.0
+BREAST_PATIENT_FLAG  Max                    1.0
+LUNG_PATIENT_FLAG    Non-Null Count         2914071
+LUNG_PATIENT_FLAG    Average                0.3319503883055698
+LUNG_PATIENT_FLAG    Standard Deviation     0.4709133721916066
+LUNG_PATIENT_FLAG    Min                    0.0
+LUNG_PATIENT_FLAG    Max                    1.0
+PANC_PATIENT_FLAG    Non-Null Count         2914071
+PANC_PATIENT_FLAG    Average                0.01650920653614823
+PANC_PATIENT_FLAG    Standard Deviation     0.12742314627848356
+PANC_PATIENT_FLAG    Min                    0.0
+PANC_PATIENT_FLAG    Max                    1.0
+NHL_PATIENT_FLAG     Non-Null Count         2914071
+NHL_PATIENT_FLAG     Average                0.019494034290859764
+NHL_PATIENT_FLAG     Standard Deviation     0.13825347546135439
+NHL_PATIENT_FLAG     Min                    0.0
+NHL_PATIENT_FLAG     Max                    1.0
+STOMACH_PATIENT_FLAG Non-Null Count         2914071
+STOMACH_PATIENT_FLAG Average                0.02166316469296733
+STOMACH_PATIENT_FLAG Standard Deviation     0.14558117756563893
+STOMACH_PATIENT_FLAG Min                    0.0
+STOMACH_PATIENT_FLAG Max                    1.0
+OVARIAN_PATIENT_FLAG Non-Null Count         2914071
+OVARIAN_PATIENT_FLAG Average                0.046982726227329394
+OVARIAN_PATIENT_FLAG Standard Deviation     0.21160190223342745
+OVARIAN_PATIENT_FLAG Min                    0.0
+OVARIAN_PATIENT_FLAG Max                    1.0
+MELANOMA_PATIENT_FLAG Non-Null Count         2914071
+MELANOMA_PATIENT_FLAG Average                0.08665059979664189
+MELANOMA_PATIENT_FLAG Standard Deviation     0.28132241380700007
+MELANOMA_PATIENT_FLAG Min                    0.0
+MELANOMA_PATIENT_FLAG Max                    1.0
+CLL_PATIENT_FLAG     Non-Null Count         2914071
+CLL_PATIENT_FLAG     Average                0.005793269964939084
+CLL_PATIENT_FLAG     Standard Deviation     0.07589275304381249
+CLL_PATIENT_FLAG     Min                    0.0
+CLL_PATIENT_FLAG     Max                    1.0
+RENAL_PATIENT_FLAG   Non-Null Count         2914071
+RENAL_PATIENT_FLAG   Average                0.02021639143315314
+RENAL_PATIENT_FLAG   Standard Deviation     0.14073981578726688
+RENAL_PATIENT_FLAG   Min                    0.0
+RENAL_PATIENT_FLAG   Max                    1.0
+GMB_PATIENT_FLAG     Non-Null Count         2914071
+GMB_PATIENT_FLAG     Average                0.06218825828197048
+GMB_PATIENT_FLAG     Standard Deviation     0.24149720252494225
+GMB_PATIENT_FLAG     Min                    0.0
+GMB_PATIENT_FLAG     Max                    1.0
+URINARY_PATIENT_FLAG Non-Null Count         2914071
+URINARY_PATIENT_FLAG Average                0.016307083801321245
+URINARY_PATIENT_FLAG Standard Deviation     0.12665373395184978
+URINARY_PATIENT_FLAG Min                    0.0
+URINARY_PATIENT_FLAG Max                    1.0
+HEADNECK_PATIENT_FLAG Non-Null Count         2914071
+HEADNECK_PATIENT_FLAG Average                0.19824328233594857
+HEADNECK_PATIENT_FLAG Standard Deviation     0.3986764827374194
+HEADNECK_PATIENT_FLAG Min                    0.0
+HEADNECK_PATIENT_FLAG Max                    1.0
+PROSTATE_PATIENT_FLAG Non-Null Count         2914071
+PROSTATE_PATIENT_FLAG Average                0.03860715816464321
+PROSTATE_PATIENT_FLAG Standard Deviation     0.19265684062638413
+PROSTATE_PATIENT_FLAG Min                    0.0
+PROSTATE_PATIENT_FLAG Max                    1.0
+CRVO_PATIENT_FLAG    Non-Null Count         2914071
+CRVO_PATIENT_FLAG    Average                0.035376626032790556
+CRVO_PATIENT_FLAG    Standard Deviation     0.18472988949759486
+CRVO_PATIENT_FLAG    Min                    0.0
+CRVO_PATIENT_FLAG    Max                    1.0
+BRVO_PATIENT_FLAG    Non-Null Count         2914071
+BRVO_PATIENT_FLAG    Average                0.044326305021394466
+BRVO_PATIENT_FLAG    Standard Deviation     0.2058190910518847
+BRVO_PATIENT_FLAG    Min                    0.0
+BRVO_PATIENT_FLAG    Max                    1.0
+WETAMD_PATIENT_FLAG  Non-Null Count         2914071
+WETAMD_PATIENT_FLAG  Average                0.25946450858609826
+WETAMD_PATIENT_FLAG  Standard Deviation     0.43834089850989744
+WETAMD_PATIENT_FLAG  Min                    0.0
+WETAMD_PATIENT_FLAG  Max                    1.0
+CARCINOID_PATIENT_FLAG Non-Null Count         2914071
+CARCINOID_PATIENT_FLAG Average                0.00860891858846267
+CARCINOID_PATIENT_FLAG Standard Deviation     0.09238402479880534
+CARCINOID_PATIENT_FLAG Min                    0.0
+CARCINOID_PATIENT_FLAG Max                    1.0
+CERVICAL_PATIENT_FLAG Non-Null Count         2914071
+CERVICAL_PATIENT_FLAG Average                0.009507661275240034
+CERVICAL_PATIENT_FLAG Standard Deviation     0.09704261375276962
+CERVICAL_PATIENT_FLAG Min                    0.0
+CERVICAL_PATIENT_FLAG Max                    1.0
+PHYSICIAN_SPECIALTY_DESC Non-Null Count         2744811
+PHYSICIAN_SPECIALTY_DESC Min Length             7
+PHYSICIAN_SPECIALTY_DESC Max Length             55
+PHYSICIAN_SPECIALTY_DESC Approx Distinct Count  134
+PHYSICIAN_ZIP_CODE   Non-Null Count         2744811
+PHYSICIAN_ZIP_CODE   Min Length             5
+PHYSICIAN_ZIP_CODE   Max Length             5
+PHYSICIAN_ZIP_CODE   Approx Distinct Count  6133
+REGION_NAME          Non-Null Count         2744761
+REGION_NAME          Min Length             4
+REGION_NAME          Max Length             10
+REGION_NAME          Approx Distinct Count  3
+REGION_NAME_AVA      Non-Null Count         2744761
+REGION_NAME_AVA      Min Length             4
+REGION_NAME_AVA      Max Length             13
+REGION_NAME_AVA      Approx Distinct Count  7
+PLAN_NAME            Non-Null Count         493023
+PLAN_NAME            Min Length             2
+PLAN_NAME            Max Length             60
+PLAN_NAME            Approx Distinct Count  2162
+PRIMARY_PHY_INDICATOR Non-Null Count         2048416
+PRIMARY_PHY_INDICATOR Min Length             1
+PRIMARY_PHY_INDICATOR Max Length             1
+PRIMARY_PHY_INDICATOR Approx Distinct Count  1
+PRIMARY_PAYER_INDICATOR Non-Null Count         2097002
+PRIMARY_PAYER_INDICATOR Min Length             1
+PRIMARY_PAYER_INDICATOR Max Length             1
+PRIMARY_PAYER_INDICATOR Approx Distinct Count  1
+PRIMARY_LOC_INDICATOR Non-Null Count         2269991
+PRIMARY_LOC_INDICATOR Min Length             1
+PRIMARY_LOC_INDICATOR Max Length             1
+PRIMARY_LOC_INDICATOR Approx Distinct Count  1
+PRODUCT_NAME         Non-Null Count         2914071
+PRODUCT_NAME         Min Length             6
+PRODUCT_NAME         Max Length             8
+PRODUCT_NAME         Approx Distinct Count  5

@@ -1,0 +1,137 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u><font size="14" color="blue">x</font></u>
+!define foreign_key(x) <font size="12" color="Green">x</font>
+!define link(t1,c1,t2,c2) t1 c1 -- c2 t2
+!define linkTo(t1,c1,t2) t1 c1 --> t2
+
+hide methods
+hide stereotypes
+
+table(nppes) {
+primary_key(NPI: String)
+Entity_Type_Code: String
+
+Replacement_NPI: String
+Employer_Identification_Number_EIN: String
+
+Provider_Organization_Name_Legal_Business_Name: String
+Provider_Last_Name_Legal_Name: String
+Provider_First_Name: String
+Provider_Middle_Name: String
+Provider_Name_Prefix_Text: String
+Provider_Name_Suffix_Text: String
+Provider_Credential_Text: String
+Provider_Other_Organization_Name: String
+Provider_Other_Organization_Name_Type_Code: String
+Provider_Other_Last_Name: String
+Provider_Other_First_Name: String
+Provider_Other_Middle_Name: String
+Provider_Other_Name_Prefix_Text: String
+Provider_Other_Name_Suffix_Text: String
+Provider_Other_Credential_Text: String
+Provider_Other_Last_Name_Type_Code: String
+
+Provider_First_Line_Business_Mailing_Address: String
+Provider_Second_Line_Business_Mailing_Address: String
+Provider_Business_Mailing_Address_City_Name: String
+Provider_Business_Mailing_Address_State_Name: String
+Provider_Business_Mailing_Address_Postal_Code: String
+Provider_Business_Mailing_Address_Country_Code_If_outside_US: String
+Provider_Business_Mailing_Address_Telephone_Number: String
+Provider_Business_Mailing_Address_Fax_Number: String
+
+Provider_First_Line_Business_Practice_Location_Address: String
+Provider_Second_Line_Business_Practice_Location_Address: String
+
+Provider_Business_Practice_Location_Address_City_Name: String
+Provider_Business_Practice_Location_Address_State_Name: String
+Provider_Business_Practice_Location_Address_Postal_Code: String
+Provider_Business_Practice_Location_Address_Country_Code_If_outside_US: String
+Provider_Business_Practice_Location_Address_Telephone_Number: String
+Provider_Business_Practice_Location_Address_Fax_Number: String
+
+Provider_Enumeration_Date: Timestamp[MM/dd/yyyy]
+Last_Update_Date: Timestamp[MM/dd/yyyy]
+NPI_Deactivation_Reason_Code: String
+NPI_Deactivation_Date: Timestamp[MM/dd/yyyy]
+NPI_Reactivation_Date: Timestamp[MM/dd/yyyy]
+
+Provider_Gender_Code: String
+
+Authorized_Official_Last_Name: String
+Authorized_Official_First_Name: String
+Authorized_Official_Middle_Name: String
+Authorized_Official_Title_or_Position: String
+Authorized_Official_Telephone_Number: String
+
+Healthcare_Provider_Taxonomy_Code_1_to_15: String
+Provider_License_Number_1_to_15: String
+Provider_License_Number_State_Code_1_to_15: String
+Healthcare_Provider_Primary_Taxonomy_Switch_1_to_15: String
+
+Other_Provider_Identifier_1_to_50: String
+Other_Provider_Identifier_Type_Code_1_to_50: String
+Other_Provider_Identifier_State_1_to_50: String
+Other_Provider_Identifier_Issuer_1_to_50: String
+
+Is_Sole_Proprietor: String
+Is_Organization_Subpart: String
+
+Parent_Organization_LBN: String
+Parent_Organization_TIN: String
+
+Authorized_Official_Name_Prefix_Text: String
+Authorized_Official_Name_Suffix_Text: String
+Authorized_Official_Credential_Text: String
+
+Healthcare_Provider_Taxonomy_Group_1_to_15: String
+}
+
+table(13_CMS_Reimbursement_v2) {
+foreign_key(npi: String)
+nppes_provider_last_org_name: String
+nppes_provider_first_name: String
+nppes_provider_mi: String
+nppes_credentials: String
+nppes_provider_gender: String
+nppes_entity_code: String
+nppes_provider_street1: String
+nppes_provider_street2: String
+nppes_provider_city: String
+nppes_provider_zip: String
+nppes_provider_state: String
+provider_type: String
+foreign_key(hcpcs_code: String)
+year: String
+unq_benef_cnt: Double
+bene_day_srvc_cnt: Double
+line_srvc_cnt: Double
+average_Medicare_payment_amt: Double
+brand: String
+product: String
+los_cnt: Double
+}
+
+table(prcdr_code_cancer) {
+primary_key(PRCDR_CDE: String)
+PRCDR_DESC: String
+PRCDR_DRUG_NAME: String
+Indication: String
+}
+
+table(physician_referrals) {
+foreign_key(NPI1: String)
+foreign_key(NPI2: String)
+Pair_Count: Integer
+Bene_Count: Integer
+Same_Day_Count: Integer
+}
+
+link(13_CMS_Reimbursement_v2, "npi", nppes, "NPI")
+link(13_CMS_Reimbursement_v2, "hcpcs_code", prcdr_code_cancer, "PRCDR_CDE")
+link(physician_referrals, "NPI1 & NPI2", nppes, "NPI")
+link(physician_referrals, "NPI1 & NPI2", 13_CMS_Reimbursement_v2, "npi")
+
+
+@enduml

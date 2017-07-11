@@ -1,0 +1,6 @@
+# data dir
+smv.outputDir = /data/xchen/output
+smv.inputDir = /data/pdda_raw
+smv.publishDir = /data/publish
+smv.stages.magbc.etl.version = magbc.2017-05-09-112002
+smv.stages.magbc.orgmatch.version = magbc.orgmatch.20170628

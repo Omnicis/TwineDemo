@@ -1,0 +1,46 @@
+# application name
+smv.appName = MAG Variation of Care
+
+# stage definitions
+#smv.stages = com.twineanalytics.neodm.etl.gene, \
+#             com.twineanalytics.neodm.etl.pdda.cms, \
+#             com.twineanalytics.neodm.tsdm.phys.pdda, \
+#             com.twineanalytics.neodm.tsdm.phys.gene, \
+#             com.omnicis.commondata.pdda.geo, \
+#             com.omnicis.commondata.pdda.seer, \
+#             com.omnicis.commondata.pdda.chr, \
+#             com.omnicis.mag.etl, \
+#             com.omnicis.mag2.lung.etl, \
+#             com.omnicis.mag2.lung.hsa, \
+#             com.omnicis.mag2.lung.acct, \
+#             com.omnicis.mag2.xref, \
+#             com.omnicis.mag2.ui, \
+#             magbc.tsdm, \
+#             magbc.bcvc, \
+#             magbc.ui
+
+smv.stages = magbc.hsa, \
+             magbc.orgmatch, \
+             magbc.bcvc, \
+             magbc.etl, \
+             magbc.sha, \
+             magbc.ui, \
+             magbc.pdda
+
+# spark sql properties
+# spark.sql.shuffle.partitions = 512
+
+# App config (Scala)
+smv.runConfObj = com.omnicis.mag2.lung.conf.Lung2DefinitionObj
+
+# Run config (Python)
+# Runtime config
+smv.config.keys=sample, hivedb, startyear, endyear
+
+# Possible values for sample: full, hash5pct, hash1pct, hash0.1pct
+# Override the following in smv-user-conf.props to specify sampling
+smv.config.sample=full
+smv.config.hivedb=vendor_gsonar
+
+smv.config.startyear=2014
+smv.config.endyear=2017

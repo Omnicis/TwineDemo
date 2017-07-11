@@ -1,0 +1,107 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u><font size="14" color="blue">x</font></u>
+!define foreign_key(x) <font size="12" color="Green">x</font>
+!define link(t1,c1,t2,c2) t1 c1 -- c2 t2
+!define linkTo(t1,c1,t2) t1 c1 --> t2
+!define multi_columns(x) <font size="12" color="Red">x</font>
+!define important(x) <font size="12" color="Fuchsia">x</font>
+
+hide methods
+hide stereotypes
+
+table(LUNG_PATIENTS) {
+foreign_key(CLAIM_GID: String)
+foreign_key(PATIENT_GID: String)
+foreign_key(DRUG_ID: String)
+foreign_key(PHYSICIAN_KEY: String)
+PHARMACY_FLAG: String
+foreign_key(PLAN_ID: String)
+GROUP_NBR: String
+PATIENT_PAY: Double
+PLAN_PAY: Double
+SECONDARY_PLAN_ID: String
+SECONDARY_GROUP_NBR: String
+SECONDARY_PLAN_PAY: Double
+PATIENT_OOP: Double
+REFILL_CODE: Integer
+important(QUANTITY: Double)
+important(DAYS_SUPPLY: Integer)
+important(DATE: Timestamp[ddMMMyyyy])
+SEQUENCE_NUMBER: Integer
+CLAIM_STATUS: Integer
+REJECT_CODE: String
+REVERSAL_LAG: Double
+RX_NUMBER: String
+important(DAYS_TILL_NEXT_FILL: Integer)
+COPAY_30: Double
+SOURCE_OF_BUSINESS: String
+NEW_TO_PRODUCT: Integer
+CONCOMITANT_FLAG: Integer
+PTD_FINAL_CLAIM: Integer
+DAW_CDE: Integer
+REFILL_ATHRZ: Integer
+foreign_key(PRODUCT: String)
+PAYMENT_TYPE: String
+foreign_key(PHYSICIAN_GID: String)
+foreign_key(PHYSICIAN_ME_NUMBER: String)
+foreign_key(LOCATION_CODE: String)
+SRVC_UNT_NBR: String
+ADJ_SRVC_UNIT_NBR: String
+SRVC_LINE_SEQ: String
+PAYER_TYPE: String
+COMPLETION_FLAG: String
+DUP_FLAG: String
+SRVC_CHRG_AMT: Double
+important(INDICATION: String)
+DIAG0: String
+DIAG1: String
+DIAG2: String
+DIAG3: String
+DIAG4: String
+DIAG5: String
+DIAG6: String
+DIAG7: String
+DIAG8: String
+DIAG9: String
+important(CLAIM_TYPE: String)
+important(LOCATION: String)
+important(MONTH: Integer)
+important(QUARTER: String)
+important(PATIENT_AGE: Integer)
+important(PATIENT_GENDER: String)
+foreign_key(PTNT_ZIP3: String)
+foreign_key(PTNT_STATE: String)
+CRC_PATIENT_FLAG: Integer
+BREAST_PATIENT_FLAG: Integer
+LUNG_PATIENT_FLAG: Integer
+PANC_PATIENT_FLAG: Integer
+NHL_PATIENT_FLAG: Integer
+STOMACH_PATIENT_FLAG: Integer
+OVARIAN_PATIENT_FLAG: Integer
+MELANOMA_PATIENT_FLAG: Integer
+CLL_PATIENT_FLAG: Integer
+RENAL_PATIENT_FLAG: Integer
+GMB_PATIENT_FLAG: Integer
+URINARY_PATIENT_FLAG: Integer
+HEADNECK_PATIENT_FLAG: Integer
+PROSTATE_PATIENT_FLAG: Integer
+CRVO_PATIENT_FLAG: Integer
+BRVO_PATIENT_FLAG: Integer
+WETAMD_PATIENT_FLAG: Integer
+CARCINOID_PATIENT_FLAG: Integer
+CERVICAL_PATIENT_FLAG: Integer
+PHYSICIAN_SPECIALTY_DESC: String
+foreign_key(PHYSICIAN_ZIP_CODE: String)
+REGION_NAME: String
+REGION_NAME_AVA: String
+PLAN_NAME: String
+PRIMARY_PHY_INDICATOR: String
+PRIMARY_PAYER_INDICATOR: String
+important(PRIMARY_LOC_INDICATOR: String)
+important(PRODUCT_NAME: String)
+}
+
+@enduml
+
+

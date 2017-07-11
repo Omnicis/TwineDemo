@@ -1,0 +1,49 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define factT(x) class x << (F,#DC504F) fact >>
+!define dimT(x) class x << (D,#3E93B5) dim >>
+!define softDimT(x) class x << (D,#3E93B5) softDim >>
+!define primary_key(x) <b><font size="14" color="#4041A4">x</font></b>
+!define foreign_key(x) <b><font size="12" color="#6666FF">x</font></b>
+!define link(t1,c1,t2,c2) t1 c1 -- c2 t2
+hide empty fields
+hide stereotypes
+
+skinparam class {
+  BackgroundColor<<fact>> #FFF9F9
+  BackgroundColor<<dim>> #EFF5F8
+  BackgroundColor<<softDim>> #CDCDCD
+  BorderColor<<fact>> #DC504F
+  BorderColor<<dim>> #3E93B5
+  BorderColor<<softDim>> #3E93B5
+  ArrowColor #1078A1
+}
+
+
+package "Links" as Links <<Rect>>{
+  dimT(HCOS) {
+    'HCOS Organization and affiliation data
+    primary_key(md_id)
+    foreign_key(child_mdm_id) //Account
+    foreign_key(parent_mdm_id) //Account
+  }
+  dimT("HCP Core"){
+    'Genentech Prescriber master data including credential and license data
+    primary_key(md_id)
+  }
+  dimT("Javelin Affiliations"){
+    'Field-defined Prescriber-to-DDD affiliation data
+    primary_key(md_id)
+    foreign_key(acct_mdm_id)
+  }
+  dimT(JAMS) {
+    'Field roster and territory alignment data
+    primary_key(zip)
+    foreign_key(territory)
+    foreign_key(division)
+    foreign_key(region)
+  }
+}
+
+
+@enduml

@@ -1,0 +1,103 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >> 
+!define factT(x) class x << (F,#DC504F) fact >>
+!define dimT(x) class x << (D,#3E93B5) dim >>
+!define softDimT(x) class x << (D,#3E93B5) softDim >>
+!define primary_key(x) <b><font size="14" color="#4041A4">x</font></b>
+!define foreign_key(x) <b><font size="12" color="#6666FF">x</font></b>
+!define link(t1,c1,t2,c2) t1 c1 -- c2 t2
+hide empty fields
+hide stereotypes
+
+skinparam class {
+  BackgroundColor<<fact>> #FFF9F9
+  BackgroundColor<<dim>> #EFF5F8
+  BackgroundColor<<softDim>> #CDCDCD
+  BorderColor<<fact>> #DC504F
+  BorderColor<<dim>> #3E93B5
+  BorderColor<<softDim>> #3E93B5
+  ArrowColor #1078A1
+}
+
+package "County Level" as County <<Rect>>{
+  factT("Seer Incident" as Seer) {
+    primary_key(CASENUM: String)
+    primary_key(SEQ_NUM: Int)
+    foreign_key(STCOUNTY: String //fips: Int)
+    DATE_yr: Int
+    DATE_mo: Int
+    --
+    ***
+  }
+
+  factT("Seer Population" as SeerPop) {
+    primary_key(Year: Int)
+    primary_key(FIPS: Int)
+    primary_key(Registry: String)
+    primary_key(Race: String)
+    primary_key(Origin: String)
+    primary_key(Sex: String)
+    primary_key(Age: String //Group)
+    --
+    Population: Double
+  }
+
+  factT("County Heath Rank 2014" as CHR) {
+    primary_key(fips: Int)
+    --
+    County_that_was_not_ranked: String
+    *** 57 vars ***
+  }
+  
+  dimT("Zip to County Map" as ZipCounty){
+    primary_key(ZCTA5: String)
+    foreign_key(GEOID: String)
+    --
+    ****
+  }
+}
+
+package "NPI Level" as NpiLevel <<Rect>>{
+  factT("NPPES - NPI Master" as Npi) {
+    primary_key(NPI: String)
+    Provider_Enumeration_Date: Timestamp
+    Last_Update_Date: Timestamp
+    Healthcare_Provider_Taxonomy_Code_1: String
+    --
+    *****
+  }
+
+  factT("Physician Referral 2014" as Referral) {
+    primary_key(NPI1: String) 
+    primary_key(NPI2: String)
+    --
+    Pair_Count: Integer
+    Bene_Count: Integer
+    Same_Day_Count: Integer
+  }
+
+  factT("CMS Reimbusment 2012" as CMS){
+    primary_key(npi: String)
+    primary_key(hcpcs_code: String)
+    --
+    ****
+  }
+  
+  dimT("Taxonomy Lookup" as Taxonomy) {
+    primary_key(taxonomyID: String)
+    --
+    l4_desc: String
+    l3_taxonomyID: String
+    l3_desc: String
+    l2_desc: String
+    l1_desc: String
+  }
+  
+  dimT("Cancer Procedure Codes" as Prcdr) {
+    primary_key(prcdr_code: String)
+    ---
+    ****
+  }
+}
+
+@enduml

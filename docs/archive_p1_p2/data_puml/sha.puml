@@ -1,0 +1,494 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u><font size="14" color="blue">x</font></u>
+!define foreign_key(x) <font size="12" color="Green">x</font>
+!define link(t1,c1,t2,c2) t1 c1 -- c2 t2
+!define linkTo(t1,c1,t2) t1 c1 --> t2
+!define multi_columns(x) <font size="12" color="Red">x</font>
+
+hide methods
+hide stereotypes
+
+table(LOCATION_DESCRIPTION) {
+primary_key(LOCATION_CODE: Integer)
+LOCATION_DESC: String
+}
+
+table(MODIFIER_DESCRIPTION) {
+primary_key(PRCDR_MDFR_CDE: String)
+PRCDR_MDFR_DESC: String
+}
+
+table(CLAIM_DIAGNOSIS) {
+RECORD_ID: String
+foreign_key(CLAIM_GID: String)
+foreign_key(DIAG_CDE: String)
+foreign_key(PATIENT_GID: String)
+SRVC_FROM_DTE: String
+COMPLETION_FLAG: String
+}
+
+table(CLAIM_MDFR) {
+RECORD_ID: String
+foreign_key(CLAIM_GID: String)
+SRVC_LINE_SEQ: String
+foreign_key(PATIENT_GID: String)
+foreign_key(PRCDR_MDFR_1_CDE: String)
+foreign_key(PRCDR_MDFR_2_CDE: String)
+foreign_key(PRCDR_MDFR_3_CDE: String)
+foreign_key(PRCDR_MDFR_4_CDE: String)
+PRCDR_DTE: String
+COMPLETION_FLAG: String
+}
+
+table(CLAIM_PHYSICIAN) {
+RECORD_ID: String
+foreign_key(CLAIM_GID: String)
+foreign_key(PHYSICIAN_KEY: String)
+PHYSICIAN_ROLE: String
+COMPLETION_FLAG: String
+}
+
+
+table(CLAIM_RECORD) {
+RECORD_ID: String
+foreign_key(CLAIM_GID: String)
+foreign_key(PATIENT_GID: String)
+SRVC_FROM_DTE: Timestamp[ddMMMyyyy]
+SRVC_TO_DTE: Timestamp[ddMMMyyyy]
+foreign_key(LOCATION_CODE: String)
+foreign_key(SRVC_UNT_NBR: Integer)
+ADJ_SRVC_UNIT_NBR: Double
+SRVC_LINE_SEQ: Integer
+PAYER_TYPE: String
+COMPLETION_FLAG: String
+DUP_FLAG: String
+SRVC_CHRG_AMT: Double
+foreign_key(PRCDR_CDE: String)
+PRCDR_DTE: Timestamp[ddMMMyyyy]
+foreign_key(DRUG_ID: String)
+}
+
+table(DIAG_DESCRIPTION) {
+primary_key(DIAG_CDE: String)
+DIAG_DESC: String
+QUAL_DIAG_GROUP: String
+INDICATION: String
+}
+
+table(DRUG_DESCRIPTION) {
+primary_key(DRUG_ID: String)
+foreign_key(NDC11: String)
+DRUG_NAME: String
+foreign_key(BGI: String)
+foreign_key(BB_USC_CODE: String)
+BB_USC_NAME: String
+DRUG_GENERIC_NAME: String
+DRUG_STRENGTH: String
+DRUG_FORM: String
+PACKAGE_SIZE: Double
+PACKAGE_DESCRIPTION: String
+MANUFACTURER: String
+NDC_START_DATE: Timestamp[ddMMMyyyy]
+}
+
+table(PATIENT_ACTIVITY) {
+foreign_key(PATIENT_GID: String)
+ACTIVITY_TYPE: String
+foreign_key(PLAN_ID: String)
+ACTIVITY_YEAR: Integer
+ACTIVITY_QUARTER: Integer
+}
+
+table(PATIENT_DEMOGRAPHIC) {
+primary_key(PATIENT_GID: String)
+PATIENT_HIPAA_BIRTH_YEAR: Integer
+PATIENT_GENDER: String
+foreign_key(PTNT_ZIP3: String)
+PTNT_STATE: String
+}
+
+table(PHYSICIAN_DIMENSION) {
+primary_key(PHYSICIAN_GID: String)
+foreign_key(PHYSICIAN_ME_NUMBER: String)
+foreign_key(PHYSICIAN_DEA_NUMBER: String)
+foreign_key(PHYSICIAN_SPECIALTY_CODE: String)
+PHYSICIAN_SPECIALTY_DESC: String
+PHYSICIAN_LAST_NAME: String
+PHYSICIAN_FIRST_NAME: String
+PHYSICIAN_ADDRESS: String
+PHYSICIAN_CITY: String
+PHYSICIAN_STATE: String
+foreign_key(PHYSICIAN_ZIP_CODE: String)
+PHYSICIAN_AGE: Integer
+PHYSICIAN_GENDER: String
+primary_key(PHYSICIAN_KEY: String)
+PDRP_FLAG: String
+PDRP_FLAG_DATE: Timestamp[ddMMMyyyy]
+NO_CONTACT_FLAG: String
+}
+
+table(PHYSICIAN_STABILITY) {
+primary_key(PHYSICIAN_GID: String)
+foreign_key(PHYSICIAN_ME_NUMBER: String)
+foreign_key(PHYSICIAN_DEA_NUMBER: String)
+foreign_key(PHYSICIAN_SPECIALTY_CODE: String)
+PHYSICIAN_SPECIALTY_DESC: String
+PHYSICIAN_LAST_NAME: String
+PHYSICIAN_FIRST_NAME: String
+PHYSICIAN_ADDRESS: String
+PHYSICIAN_CITY: String
+PHYSICIAN_STATE: String
+PHYSICIAN_ZIP_CODE: String
+PHYSICIAN_AGE: Integer
+PHYSICIAN_GENDER: String
+multi_columns(M_200701..M_201701: Integer)
+}
+
+table(PLAN_DESCRIPTION) {
+primary_key(PLAN_ID: String)
+PLAN_NAME: String
+PLAN_TYPE: String
+PLAN_SUBTYPE: String
+PAYMENT_TYPE: String
+REGIONAL_NAME: String
+ORGANIZATION_NAME: String
+ORGANIZATION_TYPE: String
+ADMIN_NAME: String
+ADMIN_TYPE: String
+foreign_key(MCO_PAYER_ID: String)
+}
+
+table(PROC_DESCRIPTION) {
+primary_key(PRCDR_CDE: String)
+PRCDR_DESC: String
+PRCDR_DRUG_NAME: String
+}
+
+table(REJECT) {
+primary_key(REJECT_CODE: String)
+REJECT_DESCRIPTION: String
+}
+
+table(CLAIM_RX) {
+foreign_key(CLAIM_GID: String)
+foreign_key(PATIENT_GID: String)
+foreign_key(DRUG_ID: String)
+foreign_key(PHYSICIAN_KEY: String)
+PHARMACY_FLAG: String
+foreign_key(PLAN_ID: String)
+foreign_key(GROUP_NBR: String)
+PATIENT_PAY: Double
+PLAN_PAY: Double
+foreign_key(SECONDARY_PLAN_ID: String)
+foreign_key(SECONDARY_GROUP_NBR: String)
+SECONDARY_PLAN_PAY: Double
+PATIENT_OOP: Double
+foreign_key(REFILL_CODE: Integer)
+QUANTITY: Double
+DAYS_SUPPLY: Integer
+RX_FILL_DTE: Timestamp[ddMMMyyyy]
+SEQUENCE_NUMBER: String
+CLAIM_STATUS: Integer
+foreign_key(REJECT_CODE: String)
+REVERSAL_LAG: Double
+foreign_key(RX_NUMBER: String)
+DAYS_TILL_NEXT_FILL: Integer
+COPAY_30: Double
+SOURCE_OF_BUSINESS: String
+NEW_TO_PRODUCT: Integer
+CONCOMITANT_FLAG: Integer
+PTD_FINAL_CLAIM: Integer
+foreign_key(DAW_CDE: Integer)
+REFILL_ATHRZ: Integer
+}
+
+table(BIOONC_CALL_DATA_PERM) {
+Roster_Sls_Force_Ind: String
+Sales_Force_Ind: String
+Sales_Force_Ind_PostCIP: String
+foreign_key(ACCOUNT_ID: String)
+NAME: String
+LASTNAME: String
+FIRSTNAME: String
+PROFESSIONAL_TYPE_GNE__C: String
+MD_Ind: String
+Precriber_Ind: String
+ISPERSONACCOUNT: String
+HCO_HCP_Ind: String
+SPECIALTIES_GNE__C: String
+SUBSPECIALTIES_GNE__C: String
+MDMID_GNE__C: String
+ME__C: String
+NHL_PRESCRIBING_TIER_GNE__C: String
+PHYSICIAN_PROFILING_RITHEM_GNE: String
+POST_IND_SEGMENT: String
+POST_IND_SCHEDULE: String
+GASTRIC_CANCER_PRIORITY_GNE__C: String
+BREAST_CANCER_TIER_GNE__C: String
+AVASTIN_GBM_TIER: String
+AVASTIN_MBC_TIER: String
+AVASTIN_mCRC_TIER: String
+AVASTIN_NSCLC_TIER: String
+AVASTIN_RCC_TIER: String
+Call_Is_Parent_Ind: String
+foreign_key(Call_ID: String)
+CALL2_VOD_ID: String
+PARENT_CALL_VOD__C: String
+MEAL_EXPENSE_GNE__C: String
+TERRITORY_VOD__C: String
+TERRITORY_NUMBER_GNE__C: String
+USERNAME: String
+USERS_NAME: String
+EMAIL: String
+ALIAS: String
+User_ISACTIVE: String
+LASTLOGINDATE: Timestamp[ddMMMyyyy:hh:mm:ss]
+PROFILE_NAME_GNE__C: String
+BUSINESS_ROLE_GNE__C: String
+COMPLETED_GNE__C: Integer
+HER_OCC_TACTIC_TYPE_GNE__C: String
+AVS_OCC_TACTIC_TYPE_GNE__C: String
+HEM_OCC_TACTIC_TYPE_GNE__C: String
+PRODUCT_SPECIFIC_TACTIC_GNE__C: String
+DETAILED_PRODUCTS_VOD__C: String
+Discussion_ID: String
+Brand_Indication: String
+Strategy_Name: String
+Tactic_Name: String
+Address: String
+City: String
+State: String
+foreign_key(Zip: String)
+Create_Date: Timestamp[MM/dd/yyyy]
+Interaction_Date_GNE: Timestamp[MM/dd/yyyy]
+Recorded_Date: Timestamp[MM/dd/yyyy]
+Interaction_Month: Timestamp[MM/dd/yyyy]
+Interaction_Year: Integer
+Interaction_Quarter: String
+Interaction_WE_Date: Timestamp[MM/dd/yyyy]
+CREDENTIALS_GNE__C: String
+CREDENTIALS_GNE__PC: String
+CREDENTIALS_VOD__C: String
+CREDENTIAL_MERGE: String
+CRED_MD_DO_IND: String
+foreign_key(Terr_Num: String)
+foreign_key(Div_Num: String)
+foreign_key(Rgn_Num: String)
+Non_Ter_Level_Call_Flag: String
+OCC_Tactic: String
+Field_Title: String
+Last_Portal_Login: String
+Current_Title: String
+FIELD_TYPE: String
+Curr_Hem_Flag: String
+Curr_Her_Flag: String
+Curr_Avs_Flag: String
+Curr_Tar_Flag: String
+AVASTIN_TUMOR_TYPE: String
+Curr_Terr_Num: String
+Curr_Terr_Name: String
+Curr_Div_Num: String
+Curr_Div_Name: String
+Curr_Rgn_Num: String
+Curr_Rgn_Name: String
+SFDC_LOAD_DATE: String
+OnTheRoad_Ind: String
+INTERACTION_TYPE_GNE__C: String
+}
+
+note top: "Roster_Sls_Force_Ind, Sales_Force_Ind:, \n Sales_Force_Ind_PostCIP indicates product: Avastin, Traceva ...
+
+table(HCOS_BUSSINESS_PROFESS) {
+primary_key(IMS_ID: String)
+foreign_key(PROFESSIONAL_ID: String)
+FIRST_NAME: String
+MIDDLE_NAME: String
+LAST_NAME: String
+GEN_SUFFIX: String
+DESIGNATION: String
+GENDER: String
+ROLE: String
+PRIMARY_SPEC: String
+SECONDARY_SPEC: String
+TERTIARY_SPEC: String
+PRIMARY_PROF_DESC: String
+foreign_key(UPIN: String)
+foreign_key(ME: String)
+ALL_DEA: String
+foreign_key(NPI: String)
+STATUS_DESC: String
+foreign_key(IMS_ORG_ID: String)
+DEA: String
+AFFIL_TYPE_DESC: String
+AFFIL_IND: String
+AFFIL_RANK: Integer
+BUSINESS_NAME: String
+DBA_NAME: String
+PHYSICAL_ADDR_1: String
+PHYSICAL_ADDR_2: String
+PHYSICAL_CITY: String
+PHYSICAL_STATE: String
+foreign_key(PHYSICAL_ZIP: String)
+POSTAL_ADDR_1: String
+POSTAL_ADDR_2: String
+POSTAL_CITY: String
+POSTAL_STATE: String
+foreign_key(POSTAL_ZIP: String)
+PHONE: String
+FAX: String
+WEBSITE: String
+OWNER_STATUS: String
+PROFIT_STATUS: String
+CMI: Double
+COT_CLASSIFICATION: String
+COT_FACILITY_TYPE: String
+COT_SPECIALTY: String
+TTL_LICENSE_BEDS: Integer
+TTL_CENSUS_BEDS: Integer
+TTL_STAFFED_BEDS: Integer
+TTL_SURGERIES: String
+TTL_PROCEDURES: String
+OR_SURGERIES: String
+TEACHING_HOSP: String
+RESIDENT_PROGRAM: String
+RESIDENT_COUNT: Integer
+ALL_DDD: String
+foreign_key(ALL_NPI: String)
+foreign_key(HIN: String)
+foreign_key(MSA: String)
+NUM_OF_PROVIDERS: Integer
+foreign_key(CORP_PARENT_IMS_ORG_ID: String)
+CORP_PARENT_NAME: String
+foreign_key(OWNER_SUB_IMS_ORG_ID: String)
+OWNER_SUB_NAME: String
+foreign_key(GPO_PHARMA_IMS_ORG_ID: String)
+GPO_PHARMA_NAME: String
+foreign_key(GPO_MEDSURG_IMS_ORG_ID: String)
+GPO_MEDSURG_NAME: String
+foreign_key(PHARMA_PROV_IMS_ORG_ID: String)
+PHARMA_PROV_NAME: String
+FORMULARY: String
+ELECTRONIC_MED_REC: String
+EPRESCRIBE: String
+PAYPERFORM: String
+GENFIRST: String
+SREP_ACCESS: String
+DEACTIVATION_REASON: String
+STATUS_INDICATOR: String
+flag_340b: String
+}
+
+table(OUTLET_CUSTOMER_MASTER) {
+outlet: String
+primary_key(mdm_id: String)
+outlet_name: String
+outlet_add: String
+city: String
+state: String
+foreign_key(zip1: String)
+cot: String
+foreign_key(asn: String)
+subcat: String
+cat: String
+cat_desc: String
+prod_brnd_nme: String
+prod: String
+prod_desc: String
+prod_name: String
+manf: String
+manf_name: String
+market_name: String
+data_srce: String
+date1: Timestamp[MM/dd/yyyy]
+multi_columns(dol1..dol24: Double)
+multi_columns(pack1..pack24: Integer)
+multi_columns(vol1..vol24: Integer)
+pres_name: String
+pres_add1: String
+pres_add2: String
+pres_add3: String
+pres_add4: String
+pres_city: String
+pres_state: String
+foreign_key(pres_zip: String)
+}
+
+table(PHYSICIAN_CUSTOMER_MAS) {
+primary_key(ims: String)
+foreign_key(mdm_id: String)
+profcd_splty: String
+payerplan: String
+npayer_name: String
+nplan_name: String
+model: String
+foreign_key(srazip: String)
+category: Integer
+cat_desc: String
+rx_id: String
+market_name: String
+prod_brnd_nme: String
+prod: String
+prod_desc: String
+prod_name: String
+terr_align_prod: String
+manf: String
+manf_name: String
+srce: Integer
+last_name: String
+first_name: String
+midd_initial: String
+address: String
+city1: String
+state1: String
+foreign_key(zip1: String)
+cli_sup_data: String
+data_date: Timestamp[yyyy-MM-dd]
+data_srce: String
+multi_columns(nrx1..nrx24: Integer)
+multi_columns(trx1..trx24: Integer)
+multi_columns(nqty1..nqty24: Integer)
+multi_columns(tqty1..tqty24: Integer)
+multi_columns(ndol1..ndol24: Integer)
+raw_zip: Integer
+}
+note left: ims and mdm_id are all nulls. \n Is that was done before sharing the data.
+
+link(LOCATION_DESCRIPTION,"LOCATION_CODE",CLAIM_RECORD,"LOCATION_CODE")
+
+link(CLAIM_MDFR, "PRCDR_MDFR_1_CDE", MODIFIER_DESCRIPTION, "PRCDR_MDFR_CDE")
+link(CLAIM_MDFR, " ", MODIFIER_DESCRIPTION, " ")
+link(CLAIM_MDFR, " ", MODIFIER_DESCRIPTION, " ")
+link(CLAIM_MDFR, " ", MODIFIER_DESCRIPTION, " ")
+
+linkTo(CLAIM_RX, "CLAIM_GID", CLAIM_RECORD )
+linkTo(CLAIM_MDFR, "CLAIM_GID", CLAIM_RECORD)
+linkTo(CLAIM_PHYSICIAN, "CLAIM_GID", CLAIM_RECORD)
+linkTo(CLAIM_DIAGNOSIS, "CLAIM_GID", CLAIM_RECORD )
+
+
+linkTo(PATIENT_ACTIVITY, "PLAN_ID", PLAN_DESCRIPTION)
+linkTo(CLAIM_RX, "PLAN_ID", PLAN_DESCRIPTION)
+
+linkTo(CLAIM_RX, "DRUG_ID", DRUG_DESCRIPTION)
+linkTo(CLAIM_RECORD, "DRUG_ID", DRUG_DESCRIPTION)
+
+linkTo(CLAIM_DIAGNOSIS, "DIAG_CDE",DIAG_DESCRIPTION)
+
+linkTo(CLAIM_RX, "PATIENT_GID", PATIENT_DEMOGRAPHIC)
+linkTo(CLAIM_MDFR, "PATIENT_GID", PATIENT_DEMOGRAPHIC)
+linkTo(CLAIM_DIAGNOSIS, "PATIENT_GID", PATIENT_DEMOGRAPHIC)
+linkTo(CLAIM_RECORD, "PATIENT_GID", PATIENT_DEMOGRAPHIC)
+linkTo(PATIENT_ACTIVITY, "PATIENT_GID", PATIENT_DEMOGRAPHIC)
+
+linkTo(CLAIM_RX, "PHYSICIAN_KEY", PHYSICIAN_DIMENSION)
+linkTo(CLAIM_PHYSICIAN, "PHYSICIAN_KEY", PHYSICIAN_DIMENSION)
+
+linkTo(CLAIM_RECORD, "PRCDR_CDE", PROC_DESCRIPTION)
+
+linkTo(PHYSICIAN_STABILITY, "PHYSICIAN_GID", PHYSICIAN_DIMENSION)
+
+linkTo(CLAIM_RX, "REJECT_CODE", REJECT)
+
+@enduml
+

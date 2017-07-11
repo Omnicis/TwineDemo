@@ -1,0 +1,114 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define factT(x) class x << (F,#DC504F) fact >>
+!define dimT(x) class x << (D,#3E93B5) dim >>
+!define softDimT(x) class x << (D,#3E93B5) softDim >>
+!define primary_key(x) <b><font size="14" color="#4041A4">x</font></b>
+!define foreign_key(x) <b><font size="12" color="#6666FF">x</font></b>
+!define link(t1,c1,t2,c2) t1 c1 -- c2 t2
+hide empty fields
+hide stereotypes
+
+skinparam class {
+  BackgroundColor<<fact>> #FFF9F9
+  BackgroundColor<<dim>> #EFF5F8
+  BackgroundColor<<softDim>> #CDCDCD
+  BorderColor<<fact>> #DC504F
+  BorderColor<<dim>> #3E93B5
+  BorderColor<<softDim>> #3E93B5
+  ArrowColor #1078A1
+}
+
+package "Entity Level" as Account <<Rect>>{
+  factT("SalesByAcctAllTime" as Sales) {
+    primary_key(mdm_id: String)
+    foreign_key(zip: String)
+    time_type: String //Month, Quarter, RunMonth
+    time_value: Int
+    --
+    vials_3MG: double
+    vials_5MG: double
+    vials_norm: double
+    ***
+  }
+
+  factT("ShaByPhysAllTime" as Sha) {
+    primary_key(ame: String)
+    foreign_key(zip: String)
+    time_type: String //Month, Quarter, RunMonth
+    time_value: Int
+    --
+    claim_cnt_{Product}: double //Product: Avastin, Eylea, Lucentis
+    claim_cnt_{Indication}: double //Indication: DME, RVO, WAMD
+    claim_cnt_{Product}_{Indication}: double
+    vial_cnt_{Product}: double
+    vial_cnt_{Indication}: double
+    vial_cnt_{Product}_{Indication}: double
+    pat_cnt_{Product}: double
+    pat_cnt_{Indication}: double
+    pat_cnt_{Product}_{Indication}: double
+    ***
+  }
+
+  factT("TacticsByPhysAllTime" as Tac) {
+    primary_key(ame: String)
+    foreign_key(zip: String)
+    time_type: String //Month, Quarter, RunMonth
+    time_value: Int
+    --
+    cnt_call: Double
+    cnt_copay: Double
+    cnt_sample: Double
+    cnt_speaker: Double
+    ***
+  }
+}
+
+package "Geo Level" as GeoLevel <<Rect>>{
+  factT("SalesByGeoAllTime" as SalesGeo) {
+    primary_key(geo_type: String)
+    primary_key(geo_value: String)
+    time_type: String //Month, Quarter, RunMonth
+    time_value: Int
+    --
+    vials_3MG: double
+    vials_5MG: double
+    vials_norm: double
+    ***
+  }
+
+  factT("ShaByGeoAllTime" as ShaGeo) {
+    primary_key(geo_type: String) // zip3, Territory, Division, State, Country
+    primary_key(geo_value: String)
+    time_type: String //Month, Quarter, RunMonth
+    time_value: Int
+    --
+    claim_cnt_{Product}: double //Product: Avastin, Eylea, Lucentis
+    claim_cnt_{Indication}: double //Indication: DME, RVO, WAMD
+    claim_cnt_{Product}_{Indication}: double
+    pat_cnt_{Product}: double
+    pat_cnt_{Indication}: double
+    pat_cnt_{Product}_{Indication}: double
+    ***
+  }
+
+  factT("TacticsByGeoAllTime" as TacGeo) {
+    primary_key(geo_type: String)
+    primary_key(geo_value: String)
+    time_type: String //Month, Quarter, RunMonth
+    time_value: Int
+    --
+    cnt_call: Double
+    cnt_copay: Double
+    cnt_sample: Double
+    cnt_speaker: Double
+    cnt_phy_call: Double
+    cnt_phy_copay: Double
+    cnt_phy_sample: Double
+    cnt_phy_speaker: Double
+    ***
+  }
+
+}
+
+@enduml

@@ -1,0 +1,131 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define factT(x) class x << (F,#DC504F) fact >>
+!define dimT(x) class x << (D,#3E93B5) dim >>
+!define softDimT(x) class x << (D,#3E93B5) softDim >>
+!define primary_key(x) <b><font size="14" color="#4041A4">x</font></b>
+!define foreign_key(x) <b><font size="12" color="#6666FF">x</font></b>
+!define link(t1,c1,t2,c2) t1 c1 -- c2 t2
+hide empty fields
+hide stereotypes
+
+skinparam class {
+  BackgroundColor<<fact>> #FFF9F9
+  BackgroundColor<<dim>> #EFF5F8
+  BackgroundColor<<softDim>> #CDCDCD
+  BorderColor<<fact>> #DC504F
+  BorderColor<<dim>> #3E93B5
+  BorderColor<<softDim>> #3E93B5
+  ArrowColor #1078A1
+}
+
+package "All input tables" as DFacts <<Rect>>{
+  factT("SalesPivotByAcctM" as Sales) {
+  foreign_key(mdm_id: String)
+  foreign_key(zip: String)
+  time_type: String //Month
+  time_value: Int
+  --
+  3MG_vials: Float
+  5MG_vials: Float
+  norm_vials: Float
+  }
+
+  factT("ShaClaimPivot" as Claims){
+    primary_key(claim_gid: String)
+    foreign_key(patient_gid: String)
+    foreign_key(ame: String)
+    foreign_key(zip: String)
+    claim_date: Timestamp
+    --
+    payer: String //MEDICARE, NONMEDICARE
+    claim_cnt_{Product}: double //Product: Avastin, Eylea, Lucentis
+    claim_cnt_{Indication}: double //Indication: DME, RVO, WAMD
+    claim_cnt_{Product}_{Indication}: double
+    vial_cnt_{Product}: double
+    vial_cnt_{Indication}: double
+    vial_cnt_{Product}_{Indication}: double
+  }
+
+  factT("AllTacticsAme" as Tactics){
+  foreign_key(ame: String)
+  tactic_date: Timestamp
+  tactic_type: String
+  --
+  }
+
+  factT("PatientsByZip" as Pati){
+    primary_key(zip: String)
+    --
+    patients_DME: Long
+    patients_RVO: Long
+    patients_WAMD: Long
+    patients: Long
+  }
+
+  factT("FavorableCountsByZip" as Favor){
+    primary_key(zip: String)
+    --
+    Favorability_Negative: Double
+    Favorability_Positive: Double
+  }
+
+  factT(CMS){
+    primary_key(npi: String)
+    foreign_key(zip: String)
+    --
+    provider_type: String
+    product: String //Avastin, Eylea, Lucentis
+    los_cnt: Double //derived from bene_day_srvc_cnt
+  }
+
+  dimT("Zip5Census" as Zip){
+  primary_key(Zip: String)
+  --
+  Zip3: String
+  Territory: String
+  Division: String
+  Region: String
+  State: String
+  Country: String
+  Population: Long
+  P65: Long
+  }
+
+  softDimT("UniquePhysicianDemo" as Phys){
+  primary_key(ame: String)
+  foreign_key(zip: String)
+  --
+  Specialty: String
+  Physician_Name: String
+  Physician_Address: String
+  }
+
+  dimT("ChildAccountDemo" as CAcct){
+  primary_key(mdm_id: String)
+  foreign_key(p_mdm_id: String)
+  foreign_key(zip: String)
+  --
+  acct_name: String
+  is_LD: Boolean
+  }
+
+  dimT("ParentAccountDemo" as PAcct){
+  primary_key(p_mdm_id: String)
+  foreign_key(zip: String)
+  --
+  acct_name: String
+  }
+
+  softDimT(AffiliationMap){
+  primary_key(ame: String)
+  foreign_key(mdm_id: String)
+  }
+
+  dimT("XrefFullNpiAme" as Npi2Ame){
+    primary_key(npi: String)
+    foreign_key(ame: String)
+  }
+}
+
+@enduml

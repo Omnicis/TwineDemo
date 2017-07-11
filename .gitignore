@@ -1,0 +1,43 @@
+conf/smv-user-conf.props
+*.class
+*.log
+.idea/*
+*.iml
+r.sh
+**/.idea
+.sync-config.cson
+
+# Mac OS specific
+.DS_Store
+
+# sbt specific
+.cache/
+.history/
+.lib/
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+**/*.swp
+
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
+.c9*
+
+# data
+data/*
+output/*
+docs/**/*.png
+*json
+!src/main/javascript/**/*.json
+metastore_db/*
+
+#Python
+*.pyc
+.ipynb_checkpoints
+
+#Project specific
+log.*
