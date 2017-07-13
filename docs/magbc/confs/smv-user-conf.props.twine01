@@ -1,4 +1,0 @@
-# data dir
-smv.dataDir = /data/bzhang
-smv.publishDir = /data/publish
-smv.stages.magbc.tsdm.version = magbc.2017-04-19-090453
