@@ -45,7 +45,13 @@ class AllStatsGeoLevel(SmvModule, SmvOutput):
         zipmap = i[ZipHierMap]
         stats = i[inputdata.AllPhynStats].\
         withColumn("zip", col("phyn_zip_cde").substr(1, 5))
-
+        
+        hier_utils = HierarchyUtils(
+            'geo',
+            ('hsa', ['zip', 'hsa', 'hrr', 'country']),
+            ('county', ['zip', 'county', 'state', 'country'])
+        )
+        
         stats_agged = hier_utils.hier_agg(
             stats,
             zipmap,

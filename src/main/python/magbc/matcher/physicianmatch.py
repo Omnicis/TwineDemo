@@ -5,6 +5,14 @@ from smv.functions import *
 from magbc.core import *
 import inputdata
 
+class PhysicianMasterDF(SmvModule):
+    def requiresDS(self):
+        return [inputdata.PhysicianMaster]
+
+    def run(self, i):
+        df = i[inputdata.PhysicianMaster]
+        return df
+
 class NppesPhysicians(SmvModule):
     """
     NPPES Physician List

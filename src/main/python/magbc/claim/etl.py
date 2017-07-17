@@ -1,13 +1,3 @@
-###---GLOBAL_IMPORTS_START---###
-from smv import *
-from pyspark.sql.functions import *
-###---GLOBAL_IMPORTS_END---###
-###---InscopeClaims_IMPORTS_START---###
-import magbc.claim.inputdata
-import magbc.claim.inputdata
-
-
-###---InscopeClaims_IMPORTS_END---###
 from smv import *
 from pyspark.sql.functions import *
 from twinelib.utils import ClaimUtils
@@ -18,20 +8,19 @@ import inputdata
 class InscopeClaims(SmvModule, SmvOutput):
     """
     Filter by target products &
-    Append product information
+    Append product information 
     """
     def requiresDS(self):
-        return [magbc.claim.inputdata.Claims, magbc.claim.inputdata.ProductMaster]
+        return [inputdata.Claims, 
+        inputdata.ProductMaster]
 
     def run(self, i):
         clm = i[inputdata.Claims]
         pdt = i[inputdata.ProductMaster]
-        
+
         clmWithInfo = clm.smvJoinByKey(pdt, ["prodt"], "inner")
-        
+
         return clmWithInfo
-    def isEphemeral(self):
-        return False
 
 
 class PrimPhyn(SmvModule):

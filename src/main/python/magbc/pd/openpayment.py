@@ -24,4 +24,3 @@ class OpenPaymentPhynStats(SmvModule, SmvOutput):
             )
 
         return opagg.smvRenameField(*[(x, "Total_Amount_of_Payment_" + x) for x in targetDrugList])
-

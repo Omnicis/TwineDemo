@@ -5,7 +5,7 @@ from magbc.phys import physician
 class ZipMaster(SmvCsvFile):
     """zip level location information and pop stats"""
     def path(self):
-        return "mag_external_dependency/ZipMaster.csv"
+        return "twine_demo/ZipMaster.csv"
 
 #########Output from previous stage#########
 AllPhynStats = SmvModuleLink(physician.AllPhynStats)
