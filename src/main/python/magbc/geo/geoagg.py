@@ -2,7 +2,6 @@ from smv import *
 from smv.functions import *
 from pyspark.sql.functions import *
 import inputdata
-from magbc.core import hier_utils
 from magbc.core import targetDrugList
 from twinelib.hier import HierarchyUtils
 

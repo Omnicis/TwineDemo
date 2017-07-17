@@ -6,11 +6,7 @@ import re
 
 from twinelib.hier import HierarchyUtils
 
-hier_utils = HierarchyUtils(
-    'geo',
-    ('hsa', ['zip', 'hsa', 'hrr', 'country']),
-    ('county', ['zip', 'county', 'state', 'country'])
-)
+
 
 def addressId(zip5, addr):
     def id(s1, s2):
@@ -38,4 +34,4 @@ def fullnamescore(fns, lns):
     return sf(fns, lns)
 
 
-targetDrugList = ["HERCEPTIN", "KADCYLA", "PERJETA", "TYKERB"]
+targetDrugList = ["HERCEPTIN", "KADCYLA", "PERJETA"]
