@@ -4,7 +4,7 @@ import inputdata
 from magbc.core import targetDrugList
 
 
-class OpenPaymentPhynStats(SmvModule):
+class OpenPaymentPhynStats(SmvModule, SmvOutput):
     """
     Aggregate target drug OpenPayment Amount to physician level
     """

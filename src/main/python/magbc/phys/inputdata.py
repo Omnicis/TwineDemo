@@ -7,3 +7,10 @@ from magbc.matcher import physicianmatch
 class PhynProfile(SmvCsvFile):
     def path(self):
         return "twine_demo/physician_profile.csv"
+
+#########Output from previous stage#########
+PhysicianLevelStats = SmvModuleLink(etl.PhysicianLevelStats)
+
+OpenPaymentPhynStats = SmvModuleLink(openpayment.OpenPaymentPhynStats)
+
+PhysicianMatch = SmvModuleLink(physicianmatch.PhysicianMatch)

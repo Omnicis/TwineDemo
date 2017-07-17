@@ -2,3 +2,5 @@
 smv.outputDir = /data/xchen/output
 smv.inputDir = /data/pdda_raw
 smv.publishDir = /data/publish
+
+smv.stages.magbc.matcher.version = PhysicianMatch07172017

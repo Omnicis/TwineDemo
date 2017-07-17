@@ -12,9 +12,6 @@ hier_utils = HierarchyUtils(
     ('county', ['zip', 'county', 'state', 'country'])
 )
 
-hier_keys = ['geo_type', 'geo_value', 'geo_name']
-
-
 def addressId(zip5, addr):
     def id(s1, s2):
         if (s1 is None or s2 is None):

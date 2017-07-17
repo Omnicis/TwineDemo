@@ -1,5 +1,5 @@
 from smv import *
-from magbc.claim import etl
+from magbc.phys import physician
 
 #########zip master#########
 class ZipMaster(SmvCsvFile):
@@ -8,9 +8,4 @@ class ZipMaster(SmvCsvFile):
         return "mag_external_dependency/ZipMaster.csv"
 
 #########Output from previous stage#########
-InscopeClaims = SmvModuleLink(etl.InscopeClaims)
-
-#########Information for Physicians#########
-class PhynProfile(SmvCsvFile):
-    def path(self):
-        return "twine_demo/physician_profile.csv"
+AllPhynStats = SmvModuleLink(physician.AllPhynStats)

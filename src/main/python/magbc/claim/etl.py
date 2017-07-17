@@ -1,3 +1,13 @@
+###---GLOBAL_IMPORTS_START---###
+from smv import *
+from pyspark.sql.functions import *
+###---GLOBAL_IMPORTS_END---###
+###---InscopeClaims_IMPORTS_START---###
+import magbc.claim.inputdata
+import magbc.claim.inputdata
+
+
+###---InscopeClaims_IMPORTS_END---###
 from smv import *
 from pyspark.sql.functions import *
 from twinelib.utils import ClaimUtils
@@ -8,19 +18,20 @@ import inputdata
 class InscopeClaims(SmvModule, SmvOutput):
     """
     Filter by target products &
-    Append product information 
+    Append product information
     """
     def requiresDS(self):
-        return [inputdata.Claims, 
-        inputdata.ProductMaster]
+        return [magbc.claim.inputdata.Claims, magbc.claim.inputdata.ProductMaster]
 
     def run(self, i):
         clm = i[inputdata.Claims]
         pdt = i[inputdata.ProductMaster]
-
+        
         clmWithInfo = clm.smvJoinByKey(pdt, ["prodt"], "inner")
-
+        
         return clmWithInfo
+    def isEphemeral(self):
+        return False
 
 
 class PrimPhyn(SmvModule):
@@ -44,7 +55,7 @@ class PrimPhyn(SmvModule):
         return primPh
 
 
-class PhysicianLevelStats(SmvModule):
+class PhysicianLevelStats(SmvModule, SmvOutput):
     """
     Aggregate target drug stats to physician level
     """
@@ -57,7 +68,7 @@ class PhysicianLevelStats(SmvModule):
 
         stats = clm.smvJoinByKey(pcp, ["ptnt_gid"], "leftOuter"
             ).filter(col("drugType") == "TARGET"
-            ).groupBy("prim_phyn_gid", "prim_phyn_zip_cde"
+            ).groupBy("prim_phyn_gid"
             ).pivot("prodt_cd"
             ).agg(sum(lit(1))
             )

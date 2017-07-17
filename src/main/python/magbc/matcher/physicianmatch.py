@@ -72,7 +72,7 @@ class OpenPaymentPhysicians(SmvModule):
         return opPhyn
 
 
-class PhysicianMatch(SmvModule):
+class PhysicianMatch(SmvModule, SmvOutput):
     """
     match physicians from OpenPayment to Nppes 
     """
