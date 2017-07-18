@@ -1,4 +1,0 @@
-# data dir
-smv.outputDir = /data/xchen/output
-smv.inputDir = /data/pdda_raw
-smv.publishDir = /data/publish
