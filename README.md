@@ -1,4 +1,4 @@
-# Mag
+# VOC Demo
 
 This project is an example variation of care analysis for demo purpose.
 
