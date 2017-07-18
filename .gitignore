@@ -41,3 +41,8 @@ metastore_db/*
 
 #Project specific
 log.*
+
+#notebook specific
+notebooks/metastore_db
+notebooks/ipynb_checkpoints
+notebooks/derby.log
