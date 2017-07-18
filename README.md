@@ -1,13 +1,10 @@
-# Mag
+# VOC Demo
 
-This project is for MAG variation of care analysis, lung-phase1, lung-phase2 and her2.
+This project is an example variation of care analysis for demo purpose.
 
-Project name renamed from LungCancer to Mag.
+Project has library level dependency to SMV branch 2.1, which in trun depends on Spark 2.1.1
+* https://github.com/TresAmigosSD/SMV/tree/2.1
 
-* lung-phase1: `com.omnicis.mag`
-* lung-phase2: `com.omnicis.mag2`
+Project's data input is located at:
+* Twine01:/data/pdda_raw/twine_demo
 
-
-Project has library level dependency to
-* https://github.com/TresAmigosSD/SMV
-* https://github.com/Omnicis/NeoDM
