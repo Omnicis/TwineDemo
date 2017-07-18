@@ -3,6 +3,7 @@ from pyspark.sql.functions import *
 import etl
 
 class ForLot(SmvModule):
+    """ Aggregate claim data to patient, date level to be inputted to lot rule engine"""
     def requiresDS(self):
         return [
             etl.InscopeClaims
@@ -30,6 +31,7 @@ class ForLot(SmvModule):
 
 
 class Lot(SmvModule, SmvOutput):
+    """ Apply rule engine to records """
     def requiresDS(self):
         return [ForLot]
 

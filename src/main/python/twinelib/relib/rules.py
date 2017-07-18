@@ -4,6 +4,7 @@ from relib.RE.lotre import LoTRule, InitLoTRule, LoTPostProc
 
 
 class IR(InitLoTRule):
+    """ Assign initial lots based on first surgery date"""
     def stateSchema(self):
         return [
             ('LOT', 'double'),
@@ -14,21 +15,18 @@ class IR(InitLoTRule):
 
     def initState(self, r):
         s = {}
-        if (pydateDiff(r.firstSurgDt, r.dt) is None):
-            s['progression_reason'] = 'Patient not Initialized'
-            s['LOT'] = 0.0
-            s['prev_lot'] = 0.0
-        elif (pydateDiff(r.firstSurgDt, r.dt) <= 0):
-            s['LOT'] = 1.0
-            s['prev_lot'] = 1.0
-            s['progression_reason'] = 'M-Initialization of the Patient - Starting LOT'
-        elif (pydateDiff(r.firstSurgDt, r.dt) > 0):
+        if (pydateDiff(r.firstSurgDt, r.dt) is None or pydateDiff(r.firstSurgDt, r.dt) > 0):
             s['LOT'] = 0.1
             s['prev_lot'] = 0.1
             s['progression_reason'] = 'Initialization of the Patient - Starting LOT'
+        else:
+            s['LOT'] = 1.0
+            s['prev_lot'] = 1.0
+            s['progression_reason'] = 'M-Initialization of the Patient - Starting LOT'
 
         s['prev_dt'] = r.dt
         return s
+
 
 class LoTRuleWithDefault(LoTRule):
     """Base class for all the Line of Therapy Rules with default action"""
@@ -43,7 +41,9 @@ class LoTRuleWithDefault(LoTRule):
         s['progression_reason'] = self.reason()
         self.lotUpdate(r, s)
 
+
 class HER(LoTRuleWithDefault):
+    """If early stage patient is taking herceptin on current date, set lot to 1.0 """
     def reason(self):
         return 'Taking Herceptin'
 
@@ -55,9 +55,10 @@ class HER(LoTRuleWithDefault):
 
     def lotUpdate(self, r, s):
         s['LOT'] = 1.0
-        #s['prev_lot'] = 1.0
+
 
 class PER(LoTRuleWithDefault):
+    """ If later stage patient is taking perjeta, increase lot """
     def reason(self):
         return 'Taking perjeta'
 
@@ -70,7 +71,9 @@ class PER(LoTRuleWithDefault):
     def lotUpdate(self, r, s):
         s['LOT'] = s['prev_lot'] + 1
 
+
 class NoOtherRule(LoTRuleWithDefault):
+    """ Default if no previous rule is fired"""
     def reason(self):
         return "No Other rule"
 
