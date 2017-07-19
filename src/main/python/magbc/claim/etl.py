@@ -2,7 +2,7 @@ from smv import *
 from pyspark.sql.functions import *
 from twinelib.utils import ClaimUtils
 from magbc.core import targetDrugList
-import inputdata
+import inputdata, lot
 
 
 class InscopeClaims(SmvModule, SmvOutput):
@@ -49,11 +49,18 @@ class PhysicianLevelStats(SmvModule, SmvOutput):
     Aggregate target drug stats to physician level
     """
     def requiresDS(self):
-        return [InscopeClaims, PrimPhyn]
+        return [InscopeClaims, PrimPhyn, lot.Lot]
 
     def run(self, i):
         clm = i[InscopeClaims]
         pcp = i[PrimPhyn]
+        therpy = i[lot.Lot]
+
+        lots = therpy.groupBy("ptnt_gid"
+            ).agg(max("LOT").alias("maxLOT")
+            ).smvJoinByKey(pcp, ["ptnt_gid"], "leftOuter"
+            ).groupBy("prim_phyn_gid"
+            ).agg(avg("maxLOT").alias("Average_Line_Of_Therapy"))
 
         stats = clm.smvJoinByKey(pcp, ["ptnt_gid"], "leftOuter"
             ).filter(col("drugType") == "TARGET"
@@ -62,5 +69,6 @@ class PhysicianLevelStats(SmvModule, SmvOutput):
             ).agg(sum(lit(1))
             )
 
-        return stats.smvRenameField(*[(x, "NumberOfPrescriptions_" + x) for x in targetDrugList])
+        return stats.smvRenameField(*[(x, "NumberOfPrescriptions_" + x) for x in targetDrugList]
+            ).smvJoinByKey(lots, ["prim_phyn_gid"], "leftouter")
 
