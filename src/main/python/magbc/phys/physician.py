@@ -19,7 +19,8 @@ class AllPhynStats(SmvModule, SmvOutput):
         pp = i[inputdata.PhynProfile]
         pm = i[inputdata.PhysicianMatch]
 
-        opk = pm.select("Physician_Profile_ID", "NPI"
+        opk = pm.smvRenameField(("id", "Physician_Profile_ID"), ("_id", "NPI")
+            ).select("Physician_Profile_ID", "NPI"
             ).smvDedupByKey("Physician_Profile_ID", "NPI"
             ).smvJoinByKey(op, ["Physician_Profile_ID"], "inner")
 
