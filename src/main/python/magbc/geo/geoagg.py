@@ -56,6 +56,7 @@ class AllStatsGeoLevel(SmvModule, SmvOutput):
             zipmap,
             'hsa', 'hrr', 'country'
         )(*([sum(lit(1)).alias("Number_of_Physicians")] +
+            [avg(col("Average_Line_Of_Therapy")).alias("Average_Line_Of_Therapy")]+
             [sum(col("NumberOfPrescriptions_" +r)
                 ).alias("NumberOfPrescriptions_" +r) for r in targetDrugList] +
             [sum(col("Total_Amount_of_Payment_" +r)
